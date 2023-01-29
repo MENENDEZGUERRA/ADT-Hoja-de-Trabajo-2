@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Stack;
 
 public class PostfixEvaluator {
@@ -18,39 +19,35 @@ public class PostfixEvaluator {
     }
 
     public static int evaluatePostfix(String exp) {
-        // Crear una pila para almacenar los valores
-        Stack<Integer> stack = new Stack<>();
+        // Instanciacion de pila, vector y clase que implementa la interfaz dada
+        PostfixCalculator pfc = new PostfixCalculator();
+        Stack<Integer> stack = new Stack<Integer>();
+        ArrayList<String> VECTOR = pfc.getItems(exp);
 
-        // Recorrer cada caracter en la expresión
-        for (int i = 0; i < exp.length(); i++) {
-            char c = exp.charAt(i);
-
-            // Si el caracter es un número, agregarlo a la pila
-            if (Character.isDigit(c)) {
-                stack.push(c - '0');
-            } else {
-                // Si el caracter es un operador, obtener los dos últimos valores de la pila
+        // se recorren los elementos del vector
+        for (String st : VECTOR) {
+            if (!pfc.isOperator(st)) { // si es operando se hace push a la pila
+                stack.push(Integer.parseInt(st));
+            } else { // si es operador, se hacen pop a las ultimos 2 operandos y se operan
+                     // apropiadamente
                 int val1 = stack.pop();
                 int val2 = stack.pop();
-
-                // Realizar la operación y agregar el resultado a la pila
-                switch (c) {
-                    case '+':
-                        stack.push(val2 + val1);
+                switch (st) {
+                    case "+":
+                        stack.push(pfc.suma(val1, val2));
                         break;
-                    case '-':
-                        stack.push(val2 - val1);
+                    case "-":
+                        stack.push(pfc.resta(val1, val2));
                         break;
-                    case '*':
-                        stack.push(val2 * val1);
+                    case "*":
+                        stack.push(pfc.multiplicacion(val1, val2));
                         break;
-                    case '/':
-                        stack.push(val2 / val1);
+                    case "/":
+                        stack.push(pfc.division(val1, val2));
                         break;
                 }
             }
         }
-
         // El resultado final estará en la cima de la pila
         return stack.pop();
     }
