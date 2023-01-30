@@ -4,18 +4,18 @@ public class IStack<E> {
 
     private Vector<E> VECTOR = new Vector<E>();
 
-    public IStack() {
+    public IStack() { // constructor
     }
 
-    public int size() {
+    public int size() { // devuelve el tamaño del vector
         return VECTOR.size();
     }
 
-    public void push(E item) {
+    public void push(E item) { // agrega elemento al vector
         VECTOR.addElement(item);
     }
 
-    public E pop() {
+    public E pop() { // devuelve el ultimo valor agregado y lo elimina de la pila
         E tem;
         int size = VECTOR.size();
         tem = peek();
@@ -23,12 +23,12 @@ public class IStack<E> {
         return tem;
     }
 
-    public E peek() {
+    public E peek() { // devuelve el ultimo valor agregado
         int size = VECTOR.size();
         return VECTOR.elementAt(size - 1);
     }
 
-    public boolean isEmpty() {
+    public boolean isEmpty() { // dice si esta vacio o no
         int size = VECTOR.size();
         if (size == 0) {
             return true;

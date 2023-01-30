@@ -22,17 +22,17 @@ public class PostfixEvaluator {
         // Instanciacion de pila, vector y clase que implementa la interfaz dada
         PostfixCalculator pfc = new PostfixCalculator();
         Stack<Integer> stack = new Stack<Integer>();
-        ArrayList<String> VECTOR = pfc.getItems(exp);
+        ArrayList<String> operandos = pfc.getItems(exp);
 
         // se recorren los elementos del vector
-        for (String st : VECTOR) {
+        for (String st : operandos) {
             if (!pfc.isOperator(st)) { // si es operando se hace push a la pila
                 stack.push(Integer.parseInt(st));
             } else { // si es operador, se hacen pop a las ultimos 2 operandos y se operan
                      // apropiadamente
                 int val1 = stack.pop();
                 int val2 = stack.pop();
-                switch (st) {
+                switch (st) { // switch case para la operación apropiada
                     case "+":
                         stack.push(pfc.suma(val1, val2));
                         break;

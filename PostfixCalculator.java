@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Stack;
 
 public class PostfixCalculator implements IPostfixCalculator {
 
@@ -9,13 +8,14 @@ public class PostfixCalculator implements IPostfixCalculator {
     }
 
     @Override
-    public int resta(int a, int b) {
-        return b - a;
-    }
-
-    @Override
     public int multiplicacion(int a, int b) {
         return a * b;
+    }
+
+    // Ya que la resta y division no son conmutativas se operan b -/ a
+    @Override
+    public int resta(int a, int b) {
+        return b - a;
     }
 
     @Override
