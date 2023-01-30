@@ -33,7 +33,7 @@ public class PostfixCalculator implements IPostfixCalculator {
     }
 
     @Override
-    public boolean isOneItem(Stack<Integer> operandos) {
+    public boolean isOneItem(IStack operandos) {
         if (operandos.size() == 1) {
             return true;
         } else {
